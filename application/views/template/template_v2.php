@@ -15,7 +15,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?= base_url()?>assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="<?= base_url()?>assets/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="http://localhost/pos/assets/bower_components/font-awesome/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="http://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <link rel="shortcut icon" type="image/png" href="http://localhost/pos/uploads/images/favicon.ico"/>
+  <script src="<?= base_url()?>assets/plugins/jquery/jquery.min.js"></script>
+
+  <style>
+    .aktif, .a:hover {
+  background-color: #f4f4f4;
+  /* color: white; */
+}
+  </style>
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
@@ -31,69 +42,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Right navbar links -->
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-        <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-comments"></i>
-            <span class="badge badge-danger navbar-badge">3</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="#" class="dropdown-item">
-              <!-- Message Start -->
-              <div class="media">
-                <img src="<?= base_url()?>assets/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Brad Diesel
-                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">Call me whenever you can...</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!-- Message End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <!-- Message Start -->
-              <div class="media">
-                <img src="<?= base_url()?>assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    John Pierce
-                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">I got your message bro</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!-- Message End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <!-- Message Start -->
-              <div class="media">
-                <img src="<?= base_url()?>assets/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Nora Silvester
-                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">The subject goes here</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!-- Message End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-          </div>
-        </li>
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
+          <a class="nav-link" href="<?= site_url('pxl/auth/logout') ?>">
+            <i class="fa fa-sign-out"></i>
+            <!-- <span class="badge badge-warning navbar-badge">15</span> -->
           </a>
           
         </li>
@@ -111,10 +64,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <ul class="navbar-nav" style="margin-left:-15px;">
-            <li class="nav-item">
+            <li class="nav-item <?= $this->uri->segment(2) == 'dashboard' ? 'aktif' : '' ?>">
+                <a href="<?= base_url('pxl/dashboard')?>" class="nav-link">Dashboard </a>
+            </li>
+            <li class="nav-item <?= $this->uri->segment(2) == 'encryption' ? 'aktif' : '' ?>">
                 <a href="<?= base_url('pxl/encryption')?>" class="nav-link">Enkripsi Pesan </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?= $this->uri->segment(2) == 'decryption' ? 'aktif' : '' ?>">
                 <a href="<?= base_url('pxl/decryption')?>" class="nav-link">Dekripsi Pesan</a>
             </li>
         </ul>
@@ -123,7 +79,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
 
 
-
+  <script src="<?= base_url() ?>assets/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="<?= base_url()?>assets/plugins/jquery/jquery.min.js"></script>
   <div class="content-wrapper">
     <div class="content-header">
         <?= $contents ?>
@@ -136,8 +93,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 <!-- jQuery -->
-<script src="<?= base_url()?>assets/plugins/jquery/jquery.min.js"></script>
+<script src="http://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url()?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url()?>assets/dist/js/adminlte.min.js"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#tabelku').DataTable();
+  });
+
+  $(function(){
+      var title = '<?= $this->session->flashdata("title") ?>';
+      var text = '<?= $this->session->flashdata("text") ?>';
+      var icon = '<?= $this->session->flashdata("icon") ?>';
+
+      if(title){
+          Swal.fire({
+              title: title,
+              text: text,
+              icon : icon,
+          });
+      };
+  });
+
+</script>
+
+
 </body>
 </html>

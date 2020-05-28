@@ -1,5 +1,10 @@
 <?php
 
+// mengamankan url /site
+if (empty($row)) {
+  redirect('pxl/decryption');
+}
+
 function toBin($str) {
     $str = (string)$str;
     $l = strlen($str);
@@ -67,3 +72,4 @@ for ($x = 0; $x < ($width*$height); $x++) { //Loop through pixel by pixel
   $pixelX++; //Change x coordinates to next
 }
 ?>
+

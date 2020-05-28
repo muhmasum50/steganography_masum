@@ -54,6 +54,11 @@ $route['404_override'] = '';
 
 $route['pxl/encryption'] = 'enkripsi';
 $route['pxl/decryption'] = 'dekripsi';
+$route['pxl/dashboard'] = 'dashboard';
 $route['pxl/decryption/(:any)'] = 'dekripsi/dekripsi_plain_text/$1';
+
+//login
+$route['pxl/auth/login'] = 'auth/login';
+$route['pxl/auth/logout'] ='auth/logout';
 
 $route['translate_uri_dashes'] = FALSE;

@@ -6,8 +6,19 @@ class Enkripsi extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        check_not_login();
         $this->load->model('enkripsi_m');
     }
+
+     //notifikasi berhasil atau tidak sweetalert
+     public function message($title = NULL, $text = NULL, $icon = NULL)
+     {
+         return $this->session->set_flashdata([
+             'title' => $title,
+             'text' => $text,
+             'icon' => $icon
+         ]);
+     }
     
 
 	public function index() {
@@ -20,7 +31,7 @@ class Enkripsi extends CI_Controller {
         if(isset($_POST['enkripsi'])) {
             $post = $this->input->post(null, true);
             $config['upload_path']      = './uploads';
-                $config['allowed_types']     = 'jpg|png|jpeg';
+                $config['allowed_types']     = 'jpeg|jpg';
                 $config['max_size']         = 2048;
                 $config['file_name']        = 'gambarsebelum-'.substr(md5(rand()),0,10);
                 $this->load->library('upload', $config);
@@ -29,8 +40,7 @@ class Enkripsi extends CI_Controller {
                     if($this->upload->do_upload('gambar1')) {
                         $post['gambar1'] = $this->upload->data('file_name'); 
 
-                        function toBin($str)
-                        {
+                        function toBin($str) {
                             $str = (string)$str;
                             $l = strlen($str);
                             $result = '';
@@ -40,8 +50,7 @@ class Enkripsi extends CI_Controller {
                             return $result;
                         }
                 
-                        function toString($str)
-                        {
+                        function toString($str) {
                             $text_array = explode("\r\n", chunk_split($str, 8));
                             $newstring = '';
                             for ($n = 0; $n < count($text_array) - 1; $n++) {
@@ -52,14 +61,15 @@ class Enkripsi extends CI_Controller {
                         
                 
                 
-                            //Edit below variables
-                            $msg = $post['pesan']; //To encrypt
-                            $src = 'uploads/'.$post['gambar1']; //Start image
+                            //simpan pesan dan gambar pada new variable
+                            $msg = $post['pesan']; 
+                            $src = 'uploads/'.$post['gambar1']; 
                 
                             $msg .='|'; //EOF sign, decided to use the pipe symbol to show our decrypter the end of the message
-                            $msgBin = toBin($msg); //Convert our message to binary
-                            $msgLength = strlen($msgBin); //Get message length
-                            $img = imagecreatefrompng($src); //returns an image identifier
+                            $msgBin = toBin($msg); //convert pesan kedalam binary
+                            $msgLength = strlen($msgBin); //ambil panjang karakter pesan
+                            $img = imagecreatefromjpeg($src); //returns an image identifier
+
                             list($width, $height, $type, $attr) = getimagesize($src); //get image size
                 
                             if($msgLength>($width*$height)){ //The image has more bits than there are pixels in our image
@@ -99,21 +109,20 @@ class Enkripsi extends CI_Controller {
                 
                             }
                             $randomDigit = rand(1,9999); //Random digit for our filename
-                            imagepng($img,'uploads/result' . $randomDigit . '.jpg'); //Create image
+                            imagepng($img,'uploads/encrypted' . $randomDigit . '.jpg'); //Create image
                 
-                            echo('done: ' . 'result' . $randomDigit . '.jpg'); //Echo our image file name
+                            echo('done: ' . 'encrypted' . $randomDigit . '.jpg'); //Echo our image file name
 
-                            $post['gambar2'] = 'result'. $randomDigit . '.jpg';
+                            $post['gambar2'] = 'encrypted'. $randomDigit . '.jpg';
                             $post['pesannew'] = $msg;
 
                     
                         $this->enkripsi_m->tambahData($post);
+                        $this->message('Wawww','Kamu Berhasil Menenkripsi Pesan','success');
                         redirect('pxl/encryption');
                     }
-                    else {
-                        echo "error";
-                    }
                 }
+                $this->message('Oopps','Kamu gagal Menenkripsi Pesan','error');
                 redirect('pxl/encryption');
         }
     }

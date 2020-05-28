@@ -19,11 +19,17 @@ class Enkripsi_m extends CI_Model {
         $this->db->order_by('id_enkripsi', 'desc');
 
         if($id != null){
-            $this->db->where('id_enkripsi',$id);
+            $this->db->where('gambar2',$id);
         }
 
         $query = $this->db->get();
         return $query;
+    }
+
+    public function hapusData($id)
+    {
+        $this->db->where('gambar2',$id);
+        $this->db->delete('enkripsi');
     }
 
 }

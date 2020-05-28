@@ -9,8 +9,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Layout</a></li>
-              <li class="breadcrumb-item active">Top Navigation</li>
+              <li class="breadcrumb-item active">Enkripsi Pesan</li>
             </ol>
           </div>
         </div>
@@ -37,7 +36,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Gambar </label>
-                            <input class="form-control" type="file" name="gambar1">
+                        <input class="form-control" type="file" name="gambar1">
+                        <span class="help-block has-error">Gambar Wajib PNG!</span>
                     </div>
                     <button type="submit" name="enkripsi" class="btn btn-primary btn-flat"><i class="fa fa-paper-plane"></i> Enkripsi !</button>
                 </form>
@@ -46,3 +46,26 @@
         </div>
     </div>
 </div>
+
+
+<?php 
+$x = $this->session->flashdata('title'); 
+echo $x;
+?>
+
+
+<script type="text/javascript">
+  $(function(){
+      var title = '<?= $this->session->flashdata("title") ?>';
+      var text = '<?= $this->session->flashdata("text") ?>';
+      var icon = '<?= $this->session->flashdata("icon") ?>';
+
+      if(title){
+          Swal.fire({
+              title: title,
+              text: text,
+              icon : icon,
+          });
+      };
+  });
+</script>
