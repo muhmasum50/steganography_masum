@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2020 at 04:36 PM
+-- Generation Time: Jun 01, 2020 at 11:39 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.15
 
@@ -36,6 +36,14 @@ CREATE TABLE `enkripsi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `enkripsi`
+--
+
+INSERT INTO `enkripsi` (`id_enkripsi`, `gambar1`, `gambar2`, `encrypted_at`) VALUES
+(38, 'gambarsebelum-b8228c45f8.jpeg', 'encrypted6924.jpeg', '2020-05-27 16:06:36'),
+(39, 'gambarsebelum-259d3798e5.jpg', 'encrypted7635.jpeg', '2020-05-27 16:08:37');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -53,7 +61,7 @@ ALTER TABLE `enkripsi`
 -- AUTO_INCREMENT for table `enkripsi`
 --
 ALTER TABLE `enkripsi`
-  MODIFY `id_enkripsi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_enkripsi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

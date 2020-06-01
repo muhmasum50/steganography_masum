@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * ==================================================================
+ * 
+ * @author Muhammad Ma'sum
+ * @version 1.0
+ * 
+ * created 20 May 2020
+ */
+
+
 function check_already_login()
 {
     $ci =& get_instance();

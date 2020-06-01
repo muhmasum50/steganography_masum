@@ -1,5 +1,15 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * ==================================================================
+ * 
+ * @author Muhammad Ma'sum
+ * @version 1.0
+ * 
+ * created 20 May 2020
+ */
+
+
 if (!function_exists('tgl_indo'))
 {
 	function tgl_indo($tgl)

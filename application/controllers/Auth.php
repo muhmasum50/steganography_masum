@@ -1,6 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * ==================================================================
+ * 
+ * @author Muhammad Ma'sum
+ * @version 1.0
+ * 
+ * created 20 May 2020
+ */
+
+
 class Auth extends CI_Controller {
 
     function __construct()

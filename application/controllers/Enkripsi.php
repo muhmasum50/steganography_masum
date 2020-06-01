@@ -2,6 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 error_reporting(0);
 
+/**
+ * ==================================================================
+ * 
+ * @author Muhammad Ma'sum
+ * @version 1.0
+ * 
+ * created 20 May 2020
+ */
+
+
 class Enkripsi extends CI_Controller {
 
     function __construct() {
@@ -97,8 +107,8 @@ class Enkripsi extends CI_Controller {
                             $g = ($rgb >>8) & 0xFF; //^^ but green
                             $b = $rgb & 0xFF;//^^ but blue
                 
-                            $newR = $r; //we dont change the red or green color, only the lsb of blue
-                            $newG = $g; //^
+                            $newR = $r; 
+                            $newG = $g; 
                             $newB = toBin($b); //Convert our blue to binary
                             $newB[strlen($newB)-1] = $msgBin[$x]; //Change least significant bit with the bit from out message
                             $newB = toString($newB); //Convert our blue back to an integer value (even though its called tostring its actually toHex)
